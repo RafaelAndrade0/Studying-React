@@ -13,13 +13,34 @@ class Clock extends Component {
         }
     }
 
+    // function to calculate the remaining time
+    getTimeUntil(deadline) {
+        const time = Date.parse(deadline) - Date.parse(new Date());
+        //const actualTime = Date.parse(new Date());
+        //console.log('Time in pros', Date.parse(deadline));
+        //console.log('Actual Time', actualTime);
+        const seconds = Math.floor((time/1000) % 60);
+        const minutes = Math.floor(((time/1000)%60) % 60);
+        const hours = Math.floor(time/(1000*60*60) % 24);
+        const days = Math.floor(time/(1000*60*60*24));
+
+        console.log('seconds', seconds, 'minutes', minutes,
+                    'hours', hours, 'days', days);
+        
+        //this.setState({date: date}); {{{ERRADO! loop infinito}}}
+    }
+
     render(){
+        //Chamada a função getTimeUntil()
+        this.getTimeUntil(this.props.deadline);
+
         return(
             <div>
                 <div className="Clock-days">{this.state.days} days</div>
                 <div className="Clock-hours">{this.state.hours} hours</div>
                 <div className="Clock-minutes">{this.state.minutes} minutes</div>
                 <div className="Clock-seconds">{this.state.seconds} seconds</div>
+                <div className="Deadline">props.deadline = {this.props.deadline}</div>
             </div>
         )
     }
