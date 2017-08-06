@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Clock from './Clock'
 import './App.css';
 
 class App extends Component {
@@ -6,12 +7,14 @@ class App extends Component {
         super(props);
         this.state = {
             deadline: 'December 25, 2017', //variáveis
-            numberOfDays: 1000
+            numberOfDays: 1000,
+            newDeadline: ''
         }
     }
 
     changeDeadline() {
-        this.setState({ deadline: 'November 25, 2017' })
+        //this.setState({ deadline: 'November 25, 2017' })
+        this.setState({ deadline: this.state.newDeadline })
     }
 
     increaseNumberDays(number) {
@@ -23,15 +26,13 @@ class App extends Component {
         return(
             <div className="App">
                 <div className="Title">Countdown to {this.state.deadline}</div>
+                <Clock/>
                 <div>
-                    <div className="Clock-days">{this.state.numberOfDays} days</div>
-                    <div className="Clock-hours">30 hours</div>
-                    <div className="Clock-minutes">15 minutes</div>
-                    <div className="Clock-seconds">20 seconds</div>
-                </div>
-                
-                <div>
-                    <input placeholder='new date'/>
+                    {/* Preenchendo newDeadline pelo campo*/}
+                    <input 
+                        placeholder='new date'
+                        onChange={event => this.setState({ newDeadline: event.target.value })}
+                    />
                     {/* função anonima "()" é necessária para evitar bugs */}
                     <button onClick={ () => this.changeDeadline() }>
                         Click here!
