@@ -7,7 +7,6 @@ class App extends Component {
         super(props);
         this.state = {
             deadline: 'December 25, 2017', //variáveis
-            numberOfDays: 1000,
             newDeadline: ''
         }
     }
@@ -26,7 +25,9 @@ class App extends Component {
         return(
             <div className="App">
                 <div className="Title">Countdown to {this.state.deadline}</div>
-                <Clock/>
+                <Clock
+                    deadline={this.state.deadline}
+                />
                 <div>
                     {/* Preenchendo newDeadline pelo campo*/}
                     <input 
@@ -36,10 +37,6 @@ class App extends Component {
                     {/* função anonima "()" é necessária para evitar bugs */}
                     <button onClick={ () => this.changeDeadline() }>
                         Click here!
-                    </button>
-
-                    <button onClick={ () => this.increaseNumberDays(1001) }>
-                        Increase Days!
                     </button>
 
                 </div>
